@@ -1,0 +1,8 @@
+db.sqlite3
+__pycache__
+media
+*.log
+*.pot
+*.pyc
+node_modules
+package-lock.json
