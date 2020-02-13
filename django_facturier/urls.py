@@ -25,4 +25,5 @@ urlpatterns = [
     path('clients/<int:pk>/detail', ClientDetailView.as_view(), name='detail-client'),
     path('clients/<int:pk>/update', ClientUpdateView.as_view(), name="update-client"),
     path('clients/<int:pk>/delete', ClientDeleteView.as_view(), name="delete-client"),
+    # path('adresss/',AdressView )
 ]

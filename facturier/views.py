@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView, ModelFormMixin
 from django.views.generic import TemplateView
-from .models import Client
+from .models import Client, Address
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -47,4 +47,6 @@ class ClientDeleteView(DeleteView):
     # def get(self, request, *args, **kwargs):
     #     return self.post(request, *args, **kwargs)
 
+# class AdressView(AdressView):
 
+#     model = Client, Adress

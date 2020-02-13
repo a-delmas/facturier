@@ -14,3 +14,11 @@ class Client(models.Model):
     siret = models.IntegerField(max_length=14)
     tva = models.CharField(max_length=13)
     email = models.CharField(max_length=50)
+
+class Address(models.Model):
+    num = models.IntegerField(null=True)
+    address = models.CharField(max_length=100)
+    complement = models.CharField(max_length=100, null=True)
+    zipcode = models.IntegerField(max_length=5, null=True)
+    town = models.CharField(max_length=50, null=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
