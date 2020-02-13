@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+    <h1 class="text-center mt-5 mb-5">Liste des Clients</h1>
+    <table class="table table-striped w-75 mx-auto mb-5">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Raison Sociale</th>
+                <th scope="col">Voir</th>
+            </tr>
+        </thead>
+        {% for client in object_list %} 
+        <tbody>
+          <tr>
+            <th scope="row">{{ client.id }}</th>
+            <td>{{ client.first_name }}</td>
+            <td>{{ client.last_name }}</td>
+            <td>{{ client.raison_sociale }}</td>
+            <td><a href="{% url 'detail-client' client.id %}" class="text-dark">Consulter</a></td>
+
+          </tr>
+        </tbody>
+      </table>
+
+    {% endfor %}
+{% endblock %}

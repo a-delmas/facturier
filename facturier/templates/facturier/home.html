@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-center mt-5 font-weight-bold">Nom Entreprise</h1>
+
+<div class="link d-flex justify-content-center">
+    <p><a href="{% url 'register' %}" class="text-dark mx-3">Créer un Nouveau Client</a></p>
+    <p><a href="{% url 'list-client' %}" class="text-dark mx-3">Liste des Clients</a></p>
+    
+</div>
+
+
+{% endblock %}
