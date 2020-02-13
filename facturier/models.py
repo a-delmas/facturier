@@ -9,16 +9,24 @@ class Client(models.Model):
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    tel = models.IntegerField(max_length=10)
+    tel = models.IntegerField()
     raison_sociale = models.CharField(max_length=100)
-    siret = models.IntegerField(max_length=14)
+    siret = models.IntegerField()
     tva = models.CharField(max_length=13)
     email = models.CharField(max_length=50)
 
 class Address(models.Model):
-    num = models.IntegerField(null=True)
-    address = models.CharField(max_length=100)
-    complement = models.CharField(max_length=100, null=True)
-    zipcode = models.IntegerField(max_length=5, null=True)
-    town = models.CharField(max_length=50, null=True)
+
+    ADDRESS_CHOICES =[
+        ('SH', 'Livraison'),
+        ('BL', 'Facturation'),
+        ('HQ', 'Siège Social'),
+    ]
+    addressType = models.CharField(max_length=15, choices=ADDRESS_CHOICES, blank=True)
+
+    num = models.IntegerField(null=True, blank=True)
+    address = models.CharField(max_length=100, blank=True)
+    complement = models.CharField(max_length=100, null=True, blank=True)
+    zipcode = models.IntegerField(null=True, blank=True)
+    town = models.CharField(max_length=50, null=True, blank=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
