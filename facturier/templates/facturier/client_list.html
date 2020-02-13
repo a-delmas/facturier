@@ -12,6 +12,7 @@
                 <th scope="col">Prénom</th>
                 <th scope="col">Raison Sociale</th>
                 <th scope="col">Voir</th>
+                <th scope="col">Del</th>
             </tr>
         </thead>
         {% for client in object_list %} 
@@ -22,10 +23,33 @@
             <td>{{ client.last_name }}</td>
             <td>{{ client.raison_sociale }}</td>
             <td><a href="{% url 'detail-client' client.id %}" class="text-dark">Consulter</a></td>
-
+            <td><button data-toggle="modal" data-target="#supClient{{ client.id }}"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button></td>
           </tr>
         </tbody>
+        
+        
+        <div class="modal fade" id="supClient{{ client.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="POST" action="{% url 'delete-client' client.id%}">{% csrf_token %}
+                  <p>Are you sure you want to delete {{ client.first_name }}?</p>
+                  <input class="last" type="submit" value="Confirm">
+                </form>
+              </div>
+              <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        {% endfor %}
       </table>
-
-    {% endfor %}
 {% endblock %}

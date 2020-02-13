@@ -33,7 +33,18 @@ class ClientDetailView(DetailView):
 class ClientUpdateView(UpdateView):
 
     model = Client
-    form_class = ClientCreateView
-    template_name = 'facturier/client_form.html'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse_lazy('detail-client', args = [self.object.id])
 
     
+class ClientDeleteView(DeleteView):
+
+    model = Client
+    success_url = reverse_lazy('list-client')
+
+    # def get(self, request, *args, **kwargs):
+    #     return self.post(request, *args, **kwargs)
+
+
