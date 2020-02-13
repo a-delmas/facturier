@@ -7,6 +7,7 @@ from django.views.generic.edit import DeleteView, CreateView, UpdateView, ModelF
 from django.views.generic import TemplateView
 from .models import Client, Address
 from django.contrib.auth.forms import UserCreationForm
+from facturier.forms import AddressInlineFormSet
 
 
 class HomePageView(TemplateView):
@@ -21,6 +22,11 @@ class ClientCreateView(CreateView):
     # form_class = UserCreationForm
     fields = '__all__'
     success_url = '/'
+
+    # def get_context_data(self, **kwargs):
+    #     context = CreateView.get_context_data(self, **kwargs)
+    #     context["address_client"] = AddressInlineFormSet(instance=self.get_object())
+    #     return context
 
 class ClientListView(ListView):
 
