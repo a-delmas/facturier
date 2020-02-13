@@ -30,3 +30,10 @@ class ClientDetailView(DetailView):
 
     model = Client
 
+class ClientUpdateView(UpdateView):
+
+    model = Client
+    form_class = ClientCreateView
+    template_name = 'facturier/client_form.html'
+
+    
