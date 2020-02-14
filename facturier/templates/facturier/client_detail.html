@@ -11,7 +11,9 @@
         <p><span class="font-weight-bolder">N° TVA : </span> {{ client.tva }}</p>
         <p><span class="font-weight-bolder">N° Tel : </span> {{ client.tel }}</p>
         <p><span class="font-weight-bolder">Email : </span> {{ client.email }}</p>
-        <p><span class="font-weight-bolder">Adress : </span> {{ address.objects.all() }}</p>
+        {% for address in client.address_set.all %}
+        <p><span class="font-weight-bolder">Address {{ address.addressType }} : </span> {{ address.address }}</p>
+        {% endfor %}
         <p><a href="{% url 'update-client' client.id %}" class="btn btn-primary">Changer Infos</a></p>
         </div>
     </div>
