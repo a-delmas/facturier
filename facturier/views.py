@@ -24,7 +24,7 @@ class ClientCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = CreateView.get_context_data(self, **kwargs)
-        context["address_client"] = AddressInlineFormSet(instance=self.get_object())
+        context["address_client"] = AddressInlineFormSet()
         return context
 
 class ClientListView(ListView):

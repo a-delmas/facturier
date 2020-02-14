@@ -5,6 +5,9 @@
 {% block content %}
 <form id="newClient" method="post" enctype="multipart/form-data" class="w-50 mx-auto my-5">{% csrf_token %}
     {% bootstrap_form form %}
+
+    {% bootstrap_form address_client.forms.0 %}
+
     <input class="last btn-primary btn mb-3" type="submit" value="Register">
 </form>
 {% endblock %}
