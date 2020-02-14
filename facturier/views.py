@@ -70,13 +70,13 @@ class ClientUpdateView(UpdateView):
         return reverse_lazy('detail-client', args = [self.object.id])
 
     def get_context_data(self, **kwargs):
-        context = CreateView.get_context_data(self, **kwargs)
-        context["address_client"] = AddressInlineFormSet()
+        context = UpdateView.get_context_data(self, **kwargs)
+        context["address_client"] = AddressInlineFormSet(instance=self.get_object())
         return context
 
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
-        address_form = AddressInlineFormSet(self.request.POST)
+        address_form = AddressInlineFormSet(self.request.POST, instance = self.object)
         if form.is_valid() and address_form.is_valid():
             form.save()
             address_form.save()

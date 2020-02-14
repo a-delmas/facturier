@@ -30,3 +30,4 @@ class Address(models.Model):
     zipcode = models.IntegerField(null=True, blank=True)
     town = models.CharField(max_length=50, null=True, blank=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
+
