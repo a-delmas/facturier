@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView, ModelFormMixin
 from django.views.generic import TemplateView
 from .models import Devis, LineDevis, Client
+from facturier.models import Address
 from django.contrib.auth.forms import UserCreationForm
 from .forms import LineInlineFormSet
 from django.http import HttpResponseRedirect, HttpResponse
@@ -23,9 +24,15 @@ class DevisDetailView(DetailView):
 
     model = Devis
 
+    # form = AddressChoices
+
     template_name = 'devis_detail.html'
 
-    def get_context_data(self, **kwargs):
-        context = DetailView.get_context_data(self, **kwargs)
-        context["line_devis"] = LineInlineFormSet()
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = DetailView.get_context_data(self, **kwargs)
+    #     context["line_devis"] = LineInlineFormSet()
+    #     return context
+
+    def AddressChoices(request):
+        choice = Address.objects.filter.all()
+        return object_list(request, template_name = 'devis_detail.html', querySet= choice)

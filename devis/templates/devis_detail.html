@@ -15,9 +15,16 @@
         <ul class="list-unstyled">
             <li class="font-weight-bold"><span class="text-uppercase">{{devis.client_devis.first_name}}</span> {{devis.client_devis.last_name}}</li>
             <li>{{devis.client_devis.raison_sociale}}</li>
-            <li>{{devis.client_devis.address}}</li>
-            <li>{{devis.client_devis.complement}}</li>
-            <li>{{devis.client_devis.zipcode}}</li>
+
+            <!-- {% for address in addressType %}
+
+
+            {% endfor %} -->
+
+            <li>{{devis.client_devis.address_set.get_addressType_display}}</li>
+
+            <li>{{devis.client_devis.address_set.complement}}</li>
+            <li>{{devis.client_devis.address_set.zipcode}}</li>
             {% comment %}
             {% endcomment %}
             <li>Tel: {{devis.client_devis.tel}}</li>
@@ -35,21 +42,21 @@
                 <th scope="col">Prix Unitaire HT</th>
                 <!-- <th scope="col">Voir</th>
                     <th scope="col">Del</th> -->
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-center">
-                    {% for devis in devis.linedevis.all %}     
-                    
-                    <th scope="row">{{ devis.description }}</th>
-                    <td>{{ devis.qte }}</td>
-                    <td>{{ devis.puht }}</td>
-                    {% comment %}
-                    <td><a href="{% url 'detail-devis' devis.id %}" class="text-dark">Consulter</a></td>
-                    <td><button data-toggle="modal" data-target="#supDevist{{ devis.client_devis.id }}"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button></td>
-                    {% endcomment %}
-                    {% endfor %}
             </tr>
+        </thead>
+        <tbody>
+            {% for devis in devis.linedevis.all %}     
+            <tr class="text-center">
+                
+                <th scope="row">{{ devis.description }}</th>
+                <td>{{ devis.qte }}</td>
+                <td>{{ devis.puht }}</td>
+                {% comment %}
+                <td><a href="{% url 'detail-devis' devis.id %}" class="text-dark">Consulter</a></td>
+                <td><button data-toggle="modal" data-target="#supDevist{{ devis.client_devis.id }}"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button></td>
+                {% endcomment %}
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
     

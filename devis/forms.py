@@ -7,3 +7,6 @@ LineInlineFormSet = inlineformset_factory(Devis, LineDevis,
                                             exclude = ([]),
                                             can_delete = True, 
                                             )
+
+# AddressChoices(forms.Form):
+    # choice_fields = forms.ChoiceField(choice = ADDRESS_CHOICES)
