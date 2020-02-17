@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="row w-75 m-auto">
+    <div class="col-6 text-left font-weight-bold my-3">
+        <h2>Viking Corp.</h2>
+    </div>
+    <div class="col-6 text-right mt-2">
+        Devis n° {{ devis.id }}
+    </div>
+    <div class="col-12 text-right ">
+        <ul class="list-unstyled">
+            <li class="font-weight-bold"><span class="text-uppercase">{{devis.client_devis.first_name}}</span> {{devis.client_devis.last_name}}</li>
+            <li>{{devis.client_devis.raison_sociale}}</li>
+            <li>{{devis.client_devis.address}}</li>
+            <li>{{devis.client_devis.complement}}</li>
+            <li>{{devis.client_devis.zipcode}}</li>
+            {% comment %}
+            {% endcomment %}
+            <li>Tel: {{devis.client_devis.tel}}</li>
+        </ul>
+    </div>
+    <div class="col-12 mb-5">
+        <h2>Date du devis: {{devis.date}}</h2>
+    </div>
+
+    <table class="table table-striped w-75 mx-auto mb-5 text-center">
+        <thead>
+            <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix Unitaire HT</th>
+                <!-- <th scope="col">Voir</th>
+                    <th scope="col">Del</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center">
+                    {% for devis in devis.linedevis.all %}     
+                    
+                    <th scope="row">{{ devis.description }}</th>
+                    <td>{{ devis.qte }}</td>
+                    <td>{{ devis.puht }}</td>
+                    {% comment %}
+                    <td><a href="{% url 'detail-devis' devis.id %}" class="text-dark">Consulter</a></td>
+                    <td><button data-toggle="modal" data-target="#supDevist{{ devis.client_devis.id }}"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button></td>
+                    {% endcomment %}
+                    {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    
+
+</div>
+
+{% endblock %}

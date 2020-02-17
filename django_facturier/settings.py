@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'facturier',
     'django_facturier',
-    
+    'devis',
     'bootstrap4',
 ]
 

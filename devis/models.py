@@ -14,3 +14,4 @@ class LineDevis(models.Model):
     description = models.CharField(max_length=100)
     qte = models.IntegerField()
     puht = models.FloatField()
+    line = models.ForeignKey(Devis, on_delete=models.CASCADE, related_name='linedevis')

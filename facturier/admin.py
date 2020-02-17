@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Client, Address
+from facturier.models import Client, Address
 
 class AddressAdmin(admin.TabularInline):
 
