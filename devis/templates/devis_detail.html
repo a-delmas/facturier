@@ -28,7 +28,6 @@
     <table class="table table-striped w-75 mx-auto mb-5 text-center">
         <thead>
             <tr>
-                <th scope="col">Date</th>
                 <th scope="col">Description</th>
                 <th scope="col">Quantité</th>
                 <th scope="col">Prix Unitaire HT</th>
@@ -40,7 +39,6 @@
         <tbody>
             <tr class="text-center">
                 
-                <td>{{devis.date}}</td>
                 {% for devis in devis.linedevis.all %}     
                 <th scope="row">{{ devis.description }}</th>
                 <td>{{ devis.qte }}</td>
@@ -56,9 +54,9 @@
     </table>
 
     <div class="col-12 text-right">
-        <h4>Total HT : </h4>
-        <h4>TVA : </h4>
-        <h3>Total TTC : </h3>
+        <h4>Total HT : {{devis.total_ht}}</h4>
+        <h4>TVA (20%) : {{devis.total_tva}}</h4>
+        <h3>Total TTC : {{devis.total_ttc}}</h3>
     </div>
     
 

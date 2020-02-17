@@ -36,3 +36,15 @@ class DevisDetailView(DetailView):
     # def AddressChoices(request):
     #     choice = Address.objects.filter.all()
     #     return object_list(request, template_name = 'devis_detail.html', querySet= choice)
+
+class DevisCreateView(CreateView):
+
+    model = Devis
+    fields = '__all__'
+
+    template_name = 'devis_create.html'
+
+    def get_context_data(self, **kwargs):
+        context = CreateView.get_context_data(self, **kwargs)
+        context["devis_line"] = LineInlineFormSet()
+        return context
