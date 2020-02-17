@@ -28,11 +28,11 @@ class DevisDetailView(DetailView):
 
     template_name = 'devis_detail.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = DetailView.get_context_data(self, **kwargs)
-    #     context["line_devis"] = LineInlineFormSet()
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = DetailView.get_context_data(self, **kwargs)
+        context["address_choice"] = self.get_object().client_devis.address_set.filter(addressType='BL').first()
+        return context
 
-    def AddressChoices(request):
-        choice = Address.objects.filter.all()
-        return object_list(request, template_name = 'devis_detail.html', querySet= choice)
+    # def AddressChoices(request):
+    #     choice = Address.objects.filter.all()
+    #     return object_list(request, template_name = 'devis_detail.html', querySet= choice)

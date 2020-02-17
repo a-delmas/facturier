@@ -15,3 +15,6 @@ class LineDevis(models.Model):
     qte = models.IntegerField()
     puht = models.FloatField()
     line = models.ForeignKey(Devis, on_delete=models.CASCADE, related_name='linedevis')
+    
+    def sub_total(self):
+        return self.qte * self.puht

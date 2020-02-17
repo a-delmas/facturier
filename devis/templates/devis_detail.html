@@ -15,18 +15,9 @@
         <ul class="list-unstyled">
             <li class="font-weight-bold"><span class="text-uppercase">{{devis.client_devis.first_name}}</span> {{devis.client_devis.last_name}}</li>
             <li>{{devis.client_devis.raison_sociale}}</li>
-
-            <!-- {% for address in addressType %}
-
-
-            {% endfor %} -->
-
-            <li>{{devis.client_devis.address_set.get_addressType_display}}</li>
-
-            <li>{{devis.client_devis.address_set.complement}}</li>
-            <li>{{devis.client_devis.address_set.zipcode}}</li>
-            {% comment %}
-            {% endcomment %}
+            <li>{{address_choice.num}} {{address_choice.address}}</li>
+            <li>{{address_choice.complement}}</li>
+            <li>{{address_choice.zipcode}}</li>
             <li>Tel: {{devis.client_devis.tel}}</li>
         </ul>
     </div>
@@ -37,20 +28,24 @@
     <table class="table table-striped w-75 mx-auto mb-5 text-center">
         <thead>
             <tr>
+                <th scope="col">Date</th>
                 <th scope="col">Description</th>
                 <th scope="col">Quantité</th>
                 <th scope="col">Prix Unitaire HT</th>
+                <th scope="col">Prix Total HT</th>
                 <!-- <th scope="col">Voir</th>
                     <th scope="col">Del</th> -->
             </tr>
         </thead>
         <tbody>
-            {% for devis in devis.linedevis.all %}     
             <tr class="text-center">
                 
+                <td>{{devis.date}}</td>
+                {% for devis in devis.linedevis.all %}     
                 <th scope="row">{{ devis.description }}</th>
                 <td>{{ devis.qte }}</td>
-                <td>{{ devis.puht }}</td>
+                <td>{{ devis.puht }} €</td>
+                <td>{{devis.sub_total}}</td>
                 {% comment %}
                 <td><a href="{% url 'detail-devis' devis.id %}" class="text-dark">Consulter</a></td>
                 <td><button data-toggle="modal" data-target="#supDevist{{ devis.client_devis.id }}"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button></td>
@@ -59,6 +54,12 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="col-12 text-right">
+        <h4>Total HT : </h4>
+        <h4>TVA : </h4>
+        <h3>Total TTC : </h3>
+    </div>
     
 
 </div>
