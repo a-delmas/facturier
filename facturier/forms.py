@@ -8,6 +8,6 @@ AddressInlineFormSet = inlineformset_factory(Client, Address,
                                                 exclude = ([]),
                                                 can_delete = True,
                                                 max_num = 5,
-                                                extra = 5
+                                                extra = 1
 
 )

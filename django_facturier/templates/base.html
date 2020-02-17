@@ -20,7 +20,9 @@
     <script src="{% static 'jquery.formset.js' %}"></script>
     <script type="text/javascript">
       $(function() {
-          $('#formAddress').formset();
+          $('#formAddress').formset({
+            prefix: '{{ address_client.prefix }}'
+          });
       })
   </script>
     {{search_form.media}}
