@@ -7,7 +7,6 @@ from facturier.models import Client
 class Devis(models.Model):
 
     client_devis = models.ForeignKey(Client, on_delete=models.CASCADE)
-    # address_devis = models.ManyToManyField(Address, on_delete=models.CASCADE)
     date = models.DateField()
 
     def total_ht(self):

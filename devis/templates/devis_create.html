@@ -4,9 +4,16 @@
 
 {% block content %}
 <form id="newDevis" method="post" enctype="multipart/form-data" class="w-50 mx-auto my-5">{% csrf_token %}
-   {{ devis_line.management_form }}
    {% bootstrap_form form %}
-   {% bootstrap_form devis_line.forms.0 %}
+   
+   {% for devis_line in devis_line.forms %}
+   {% if devis_line.instance.pk%}{{devis_line.DELETE}}{% endif %}
+   <div id="formLineDevis">
+      {% bootstrap_form devis_line %}
+   </div>
+   
+   {% endfor %}
+   {{ devis_line.management_form }}
    <input class="last btn-primary btn mb-3" type="submit" value="Register">
 </form>
 {% endblock %}

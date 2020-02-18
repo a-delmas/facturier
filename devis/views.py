@@ -12,10 +12,6 @@ from .forms import LineInlineFormSet
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 
-from django.template.loader import render_to_string
-from weasyprint import HTML
-import tempfile
-
 from django.conf import settings
 
 from django_weasyprint import WeasyTemplateResponseMixin
@@ -28,15 +24,9 @@ class DevisListView(ListView):
     template_name = 'devis_list.html'
 
 
-
-
-
-
 class DevisDetailView(DetailView):
 
     model = Devis
-
-    # form = AddressChoices
 
     template_name = 'devis_detail.html'
 
@@ -48,6 +38,7 @@ class DevisDetailView(DetailView):
 
 
 class DevisPrintView(WeasyTemplateResponseMixin, DevisDetailView):
+
     pdf_attachment = True
     pdf_filename = 'devis.pdf'
 
@@ -55,6 +46,9 @@ class DevisPrintView(WeasyTemplateResponseMixin, DevisDetailView):
         context = DevisDetailView.get_context_data(self, **kwargs)
         context['pdf'] = True
         return context
+    
+    def get_pdf_filename(self):
+        return 'devis{}.pdf'.format(self.get_object().id)
         
 
 

@@ -23,6 +23,11 @@
           $('#formAddress').formset({
             prefix: '{{ address_client.prefix }}'
           });
+
+          $('#formLineDevis').formset({
+            prefix: '{{ devis_line.prefix }}'
+          });
+
       })
   </script>
     {{search_form.media}}

@@ -37,13 +37,13 @@
             </tr>
         </thead>
         <tbody>
+            {% for devis in devis.linedevis.all %}     
             <tr class="text-center">
                 
-                {% for devis in devis.linedevis.all %}     
                 <th scope="row">{{ devis.description }}</th>
                 <td>{{ devis.qte }}</td>
                 <td>{{ devis.puht }} €</td>
-                <td>{{devis.sub_total}}</td>
+                <td>{{devis.sub_total}} €</td>
                 {% comment %}
                 <td><a href="{% url 'detail-devis' devis.id %}" class="text-dark">Consulter</a></td>
                 <td><button data-toggle="modal" data-target="#supDevist{{ devis.client_devis.id }}"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button></td>
@@ -54,9 +54,9 @@
     </table>
 
     <div class="col-12 text-right">
-        <h4>Total HT : {{devis.total_ht}}</h4>
-        <h4>TVA (20%) : {{devis.total_tva}}</h4>
-        <h3>Total TTC : {{devis.total_ttc}}</h3>
+        <h4>Total HT : {{devis.total_ht}} €</h4>
+        <h4>TVA (20%) : {{devis.total_tva}} €</h4>
+        <h3>Total TTC : {{devis.total_ttc}} €</h3>
         
         {% if not pdf %}
           <a href="{% url 'update-devis' devis.id %}" class="btn btn-success my-5">Update</a>

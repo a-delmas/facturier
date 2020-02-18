@@ -6,5 +6,6 @@ LineInlineFormSet = inlineformset_factory(Devis, LineDevis,
                                             fields = '__all__',
                                             exclude = ([]),
                                             can_delete = True, 
-                                            )
+                                            extra = 1
+)
 
