@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from facturier.views import HomePageView, ClientCreateView, ClientListView, ClientDetailView, ClientUpdateView, ClientDeleteView
-from devis.views import DevisListView, DevisDetailView, DevisCreateView
+from devis.views import DevisListView, DevisDetailView, DevisCreateView, DevisUpdateView, DevisDeleteView
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +31,8 @@ urlpatterns = [
     path('devis/detail', DevisListView.as_view(), name='list-devis'),
     path('devis/<int:pk>/detail', DevisDetailView.as_view(), name='detail-devis'),
     path('devis/new', DevisCreateView.as_view(), name='create-devis'),
+    path('devis/<int:pk>/update', DevisUpdateView.as_view(), name='update-devis'),
+    path('devis/<int:pk>/delete', DevisDeleteView.as_view(), name='delete-devis'),
+    
     # path('adresss/',AdressView )
 ]

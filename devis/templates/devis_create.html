@@ -4,8 +4,9 @@
 
 {% block content %}
 <form id="newDevis" method="post" enctype="multipart/form-data" class="w-50 mx-auto my-5">{% csrf_token %}
+   {{ devis_line.management_form }}
    {% bootstrap_form form %}
-   
-    <input class="last btn-primary btn mb-3" type="submit" value="Register">
+   {% bootstrap_form devis_line.forms.0 %}
+   <input class="last btn-primary btn mb-3" type="submit" value="Register">
 </form>
 {% endblock %}

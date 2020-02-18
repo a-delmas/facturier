@@ -12,13 +12,20 @@ from .forms import LineInlineFormSet
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 
-
+from django.conf import settings
+from django_weasyprint import WeasyTemplateResponseMixin
+from django_weasyprint.views import CONTENT_TYPE_PNG
 
 class DevisListView(ListView):
 
     model = Devis
 
     template_name = 'devis_list.html'
+
+
+
+
+
 
 class DevisDetailView(DetailView):
 
@@ -33,9 +40,18 @@ class DevisDetailView(DetailView):
         context["address_choice"] = self.get_object().client_devis.address_set.filter(addressType='BL').first()
         return context
 
-    # def AddressChoices(request):
-    #     choice = Address.objects.filter.all()
-    #     return object_list(request, template_name = 'devis_detail.html', querySet= choice)
+
+
+class DevisPrintView(WeasyTemplateResponseMixin, DetailView):
+    # output of MyModelView rendered as PDF with hardcoded CSS
+    pdf_stylesheets = [
+        # settings.STATIC_ROOT + 'css/app.css',
+    ]
+    # show pdf in-line (default: True, show download dialog)
+    pdf_attachment = True
+    # suggested filename (is required for attachment!)
+    pdf_filename = 'devis.pdf'
+
 
 class DevisCreateView(CreateView):
 
@@ -44,7 +60,62 @@ class DevisCreateView(CreateView):
 
     template_name = 'devis_create.html'
 
+    def get_success_url(self):
+        return reverse_lazy('detail-devis', args = [self.object.id])
+
     def get_context_data(self, **kwargs):
         context = CreateView.get_context_data(self, **kwargs)
         context["devis_line"] = LineInlineFormSet()
         return context
+
+    def form_valid(self, form):
+        if form.is_valid():
+            self.object = form.save(commit=False)
+            devis_line = LineInlineFormSet(self.request.POST, self.request.FILES, instance = self.object)
+            if devis_line.is_valid():
+                form.save()
+                devis_line.save()
+                # login(self.request, self.object)
+                return HttpResponseRedirect(self.get_success_url())
+    
+        context = {
+            'form' : form,
+            'devis_line' : devis_line
+        }
+        return self.render_to_response(context)
+
+
+class DevisUpdateView(UpdateView):
+
+    model = Devis
+    fields = '__all__'
+    template_name = 'devis_create.html'
+
+    def get_success_url(self):
+        return reverse_lazy('detail-devis', args = [self.object.id])
+
+    def get_context_data(self, **kwargs):
+        context = UpdateView.get_context_data(self, **kwargs)
+        context["devis_line"] = LineInlineFormSet(instance=self.get_object())
+        return context
+
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        devis_line = LineInlineFormSet(self.request.POST, instance = self.object)
+        if form.is_valid() and devis_line.is_valid():
+            form.save()
+            devis_line.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            context = {
+                'form' : form,
+                'devis_line' : devis_line
+            }
+            return self.render_to_response(context)
+
+
+
+class DevisDeleteView(DeleteView):
+
+    model = Devis
+    success_url = reverse_lazy('list-devis')
