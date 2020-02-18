@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django_facturier',
     'devis',
     'facture',
-    'wkhtmltopdf',
     'bootstrap4',
 ]
 

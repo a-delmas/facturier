@@ -57,38 +57,8 @@
         <h4>Total HT : {{devis.total_ht}}</h4>
         <h4>TVA (20%) : {{devis.total_tva}}</h4>
         <h3>Total TTC : {{devis.total_ttc}}</h3>
-        
-        {% if not pdf %}
-          <a href="{% url 'update-devis' devis.id %}" class="btn btn-success my-5">Update</a>
-          <button data-toggle="modal" data-target="#supDevis"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button>
-          <a href="{% url 'generate_pdf' devis.id %}" class="btn btn-primary">Transform PDF</a>
-        {% endif %}
     </div>
-    
 
-</div>
-
-<div class="modal fade" id="supDevis" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="POST" action="{% url 'delete-devis' devis.id %}">{% csrf_token %}
-          <p>Are you sure you want to delete devis n°{{ devis.id }}?</p>
-          <input class="last" type="submit" value="Confirm">
-        </form>
-      </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
-    </div>
-  </div>
 </div>
 
 {% endblock %}

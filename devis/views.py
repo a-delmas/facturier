@@ -12,7 +12,12 @@ from .forms import LineInlineFormSet
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
+
 from django.conf import settings
+
 from django_weasyprint import WeasyTemplateResponseMixin
 from django_weasyprint.views import CONTENT_TYPE_PNG
 
@@ -42,15 +47,15 @@ class DevisDetailView(DetailView):
 
 
 
-class DevisPrintView(WeasyTemplateResponseMixin, DetailView):
-    # output of MyModelView rendered as PDF with hardcoded CSS
-    pdf_stylesheets = [
-        # settings.STATIC_ROOT + 'css/app.css',
-    ]
-    # show pdf in-line (default: True, show download dialog)
+class DevisPrintView(WeasyTemplateResponseMixin, DevisDetailView):
     pdf_attachment = True
-    # suggested filename (is required for attachment!)
     pdf_filename = 'devis.pdf'
+
+    def get_context_data(self, **kwargs):
+        context = DevisDetailView.get_context_data(self, **kwargs)
+        context['pdf'] = True
+        return context
+        
 
 
 class DevisCreateView(CreateView):
