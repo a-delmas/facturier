@@ -1,9 +1,13 @@
 from django.db import models
 from devis.models import Devis
+from facturier.models import Client
+from django.db.models import signals
+from django.dispatch import receiver
 
 
 class Facture(models.Model):
 
+    client = models.ForeignKey(Client, null=True, on_delete=models.CASCADE)
     devis = models.OneToOneField(Devis, on_delete=models.CASCADE)
     date = models.DateField()
 
@@ -31,4 +35,17 @@ class LineFacture(models.Model):
     
     def sub_total(self):
         return self.qte * self.puht
+
+
+
+
+@receiver(signals.post_save, sender=Facture)
+def create_facture(sender, instance, created, **kwargs):
+    if created:
+        facture = Facture.devis.linedevis.all().create(instance=facture)
+    else:
+        print("not save")
+
+
+
 
