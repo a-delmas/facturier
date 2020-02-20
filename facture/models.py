@@ -3,17 +3,18 @@ from devis.models import Devis
 from facturier.models import Client
 from django.db.models import signals
 from django.dispatch import receiver
+from datetime import date
 
 
 class Facture(models.Model):
 
     client = models.ForeignKey(Client, null=True, on_delete=models.CASCADE)
     devis = models.OneToOneField(Devis, on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateField(default=date.today)
 
     def total_ht(self):
         result = 0
-        for totht in self.linedevis.all():
+        for totht in self.linefacture.all():
             result += totht.sub_total()
         return result        
 

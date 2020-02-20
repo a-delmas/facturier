@@ -127,6 +127,12 @@ class TransformDevisToFactureView(DetailView):
     model = Devis
     template_name = "facture.html"
 
+    def get(self, request, *args, **kwargs) :
 
+        new_facture = Facture.objects.create (
+            devis = self.get_object()
+        )
+
+        return HttpResponseRedirect(reverse_lazy('detail-facture', args = [new_facture.id] ))
 
 

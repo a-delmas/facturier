@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="row w-75 m-auto">
+    <div class="col-6 text-left font-weight-bold my-3">
+        <h2>Viking Corp.</h2>
+    </div>
+    <div class="col-6 text-right mt-2">
+
+        Facture n° {{ facture.id }} du Devis n° {{ facture.devis.id }}
+    </div>
+    <div class="col-12 text-right ">
+        <ul class="list-unstyled">
+            <li class="font-weight-bold"><span class="text-uppercase">{{ facture.devis.client_devis.first_name }}</span> {{ facture.devis.client_devis.last_name }}</li>
+            <li>{{ facture.devis.client_devis.raison_sociale }}</li>
+            <li>{{ facture.address_choice.num }} {{ facture.address_choice.address }}</li>
+            <li>{{ facture.address_choice.complement }}</li>
+            <li>{{ facture.address_choice.zipcode }}</li>
+            <li>Tel: {{ facture.devis.client_devis.tel }}</li>
+        </ul>
+    </div>
+    <div class="col-12 mb-5">
+        <h2>Date de la Facture: {{ facture.date }}</h2>
+    </div>
+
+    <table class="table table-striped w-75 mx-auto mb-5 text-center">
+        <thead>
+            <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix Unitaire HT</th>
+                <th scope="col">Prix Total HT</th>
+                <!-- <th scope="col">Voir</th>
+                    <th scope="col">Del</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for facture in facture.linefacture.all %}     
+            <tr class="text-center">
+                
+                <th scope="row">{{ facture.description }}</th>
+                <td>{{ facture.qte }}</td>
+                <td>{{ facture.puht }} €</td>
+                <td>{{ facture.sub_total }} €</td>
+                {% comment %}
+                <td><a href="{% url 'detail-devis' devis.id %}" class="text-dark">Consulter</a></td>
+                <td><button data-toggle="modal" data-target="#supDevist{{ devis.client_devis.id }}"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button></td>
+                {% endcomment %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="col-12 text-right">
+        <h4>Total HT : {{facture.total_ht}} €</h4>
+        <h4>TVA (20%) : {{facture.total_tva}} €</h4>
+        <h3>Total TTC : {{facture.total_ttc}} €</h3>
+        
+        {% comment %}
+        {% if not pdf %}
+          <a href="{% url 'generate_pdf' devis.id %}" class="btn btn-primary my-5">Transform PDF</a>
+        {% endif %}
+        {% endcomment %}
+    </div>
+    
+
+</div>
+
+{% endblock %}
