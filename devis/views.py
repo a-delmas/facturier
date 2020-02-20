@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView, ModelFormMixin
 from django.views.generic import TemplateView
 from .models import Devis, LineDevis, Client
+from facture.models import Facture, LineFacture
 from facturier.models import Address
 from django.contrib.auth.forms import UserCreationForm
 from .forms import LineInlineFormSet
@@ -29,6 +30,7 @@ class DevisDetailView(DetailView):
     model = Devis
 
     template_name = 'devis_detail.html'
+    success_url = reverse_lazy('facture.html')
 
     def get_context_data(self, **kwargs):
         context = DetailView.get_context_data(self, **kwargs)
@@ -118,3 +120,13 @@ class DevisDeleteView(DeleteView):
 
     model = Devis
     success_url = reverse_lazy('list-devis')
+
+
+class TransformDevisToFactureView(DetailView):
+
+    model = Devis
+    template_name = "facture.html"
+
+
+
+
