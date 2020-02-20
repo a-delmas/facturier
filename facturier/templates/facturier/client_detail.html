@@ -2,9 +2,9 @@
 
 {% block content %}
 
-    <div class="card mx-auto my-5" style="width: 25rem;">
-        <h2 class="font-weight-bolder text-center">{{ client.raison_sociale }}</h2>
-        <div class="card-body">
+<div class="card mx-auto my-5" style="width: 25rem;">
+    <h2 class="font-weight-bolder text-center">{{ client.raison_sociale }}</h2>
+    <div class="card-body">
         <p><span class="font-weight-bolder">Nom : </span>{{ client.first_name }}</p>
         <p><span class="font-weight-bolder">Prenom : </span> {{ client.last_name }}</p>
         <p><span class="font-weight-bolder">N° SIRET : </span> {{ client.siret }}</p>
@@ -15,8 +15,73 @@
         <p><span class="font-weight-bolder">Address {{ address.addressType }} : </span> {{ address.address }}</p>
         {% endfor %}
         <p><a href="{% url 'update-client' client.id %}" class="btn btn-primary">Changer Infos</a></p>
-        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+
+        <h1 class="text-center mt-5 mb-5">Liste des Devis</h1>
+        <table class="table table-striped w-75 mx-auto mb-5">
+            <thead>
+                <tr>
+                    <th scope="col">N° devis</th>
+                    <th scope="col">Nom Client</th>
+                    <th scope="col">Raison Sociale</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Voir</th>
+                    <!-- <th scope="col">Del</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for devis in client.devis_set.all %}
+                <tr>
+                    <th scope="row">{{ devis.id }}</th>
+                    <td>{{ devis.client_devis.last_name }}</td>
+                    <td>{{ devis.client_devis.raison_sociale }}</td>
+                    <td>{{ devis.date }}</td>
+        
+                    <td><a href="{% url 'detail-devis' devis.id %}" class="text-dark">Consulter</a></td>
+                    {% comment %}
+                    <td><button data-toggle="modal" data-target="#supDevist{{ devis.client_devis.id }}"
+                            class="btn btn-danger"><a href="#" class="text-white">Delete</a></button></td>
+                    {% endcomment %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
+    <div class="col-6">
+        
+        <h1 class="text-center mt-5 mb-5">Liste des Factures</h1>
+        <table class="table table-striped w-75 mx-auto mb-5">
+            <thead>
+                <tr>
+                    <th scope="col">N° de Facture</th>
+                    <th scope="col">Nom Client</th>
+                    <th scope="col">Raison Sociale</th>
+                    <th scope="col">Date</th>
+                    <!-- <th scope="col">Voir</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                {% for facture in client.facture_set.all %}
+                <tr>
+                    <th scope="row">{{ facture.id }}</th>
+                    <td>{{ facture.client.last_name }}</td>
+                    <td>{{ facture.client.raison_sociale }}</td>
+                    <td>{{ facture.date }}</td>
+                    
+                    {% comment %}
+                    <td><a href="{% url 'detail-facture' facture.id %}" class="text-dark">Consulter</a></td>
+                    {% endcomment %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+</div>
 
-{% endblock %}
+        {% endblock %}

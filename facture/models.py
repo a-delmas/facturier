@@ -42,7 +42,13 @@ class LineFacture(models.Model):
 @receiver(signals.post_save, sender=Facture)
 def create_facture(sender, instance, created, **kwargs):
     if created:
-        facture = Facture.devis.linedevis.all().create(instance=facture)
+        for linedevis in instance.devis.linedevis.all() :
+            LineFacture.objects.create (
+                description = linedevis.description,
+                qte = linedevis.qte,
+                puht = linedevis.puht,
+                line = instance
+            )
     else:
         print("not save")
 

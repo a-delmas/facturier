@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from facturier.views import HomePageView, ClientCreateView, ClientListView, ClientDetailView, ClientUpdateView, ClientDeleteView
 from devis.views import DevisListView, DevisDetailView, DevisCreateView, DevisUpdateView, DevisDeleteView, DevisPrintView
+from facture.views import FactureListView, FactureDetailView
 
 
 urlpatterns = [
@@ -33,5 +34,8 @@ urlpatterns = [
     path('devis/<int:pk>/update', DevisUpdateView.as_view(), name='update-devis'),
     path('devis/<int:pk>/delete', DevisDeleteView.as_view(), name='delete-devis'),
     path('generate/<int:pk>/pdf', DevisPrintView.as_view(), name='generate_pdf'),
+    path('facture/', FactureListView.as_view(), name='list-facture'),
+    path('facture/<int:pk>/detail', FactureDetailView.as_view(), name='detail-facture'),
+   
     # path('adresss/',AdressView )
 ]
