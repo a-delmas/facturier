@@ -11,6 +11,8 @@ from facturier.forms import AddressInlineFormSet
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
+
 
 
 class HomePageView(TemplateView):
@@ -90,10 +92,13 @@ class ClientUpdateView(UpdateView):
 
 
     
-class ClientDeleteView(DeleteView):
+class ClientDeleteView(PermissionRequiredMixin, DeleteView):
 
     model = Client
     success_url = reverse_lazy('list-client')
+
+    permission_required = ('facturier.delete_facturier')
+
 
     # def get(self, request, *args, **kwargs):
     #     return self.post(request, *args, **kwargs)

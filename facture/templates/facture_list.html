@@ -19,8 +19,8 @@
         {% for facture in object_list %}     
         <tr>
             <th scope="row">{{ facture.id }}</th>
-            <td>{{ facture.client.last_name }}</td>
-            <td>{{ facture.client.raison_sociale }}</td>
+            <td>{{ facture.devis.client_devis.last_name }}</td>
+            <td>{{ facture.devis.client_devis.raison_sociale }}</td>
             <td>{{ facture.date }}</td>
             <td><a href="{% url 'detail-facture' facture.id %}" class="text-dark">Consulter</a></td>
 

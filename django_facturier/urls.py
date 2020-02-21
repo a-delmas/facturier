@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from facturier.views import HomePageView, ClientCreateView, ClientListView, ClientDetailView, ClientUpdateView, ClientDeleteView
 from devis.views import DevisListView, DevisDetailView, DevisCreateView, DevisUpdateView, DevisDeleteView, DevisPrintView, TransformDevisToFactureView
-from facture.views import FactureListView, FactureDetailView
+from facture.views import FactureListView, FactureDetailView, FacturePrintView
 
 
 urlpatterns = [
@@ -37,6 +37,9 @@ urlpatterns = [
     path('generate/<int:pk>/pdf', DevisPrintView.as_view(), name='generate_pdf'),
     path('facture/', FactureListView.as_view(), name='list-facture'),
     path('facture/<int:pk>/detail', FactureDetailView.as_view(), name='detail-facture'),
+    path('generate/<int:pk>/pdf/facture', FacturePrintView.as_view(), name='generate_pdf_facture'),
+    path('accounts/', include('django.contrib.auth.urls')),
+
    
     # path('adresss/',AdressView )
 ]

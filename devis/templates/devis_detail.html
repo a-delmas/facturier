@@ -59,11 +59,16 @@
         <h3>Total TTC : {{devis.total_ttc}} €</h3>
         
         {% if not pdf %}
+        {% if perms.devis.change_devis %}
           <a href="{% url 'update-devis' devis.id %}" class="btn btn-success my-5">Update</a>
+          {% endif %}
+          {% if perms.devis.delete_devis %}
           <button data-toggle="modal" data-target="#supDevis"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button>
-          <a href="{% url 'generate_pdf' devis.id %}" class="btn btn-primary">Transform PDF</a>
+          {% endif %}
+          {% if perms.devis.add_facture %}
           <a href="{% url 'facture' devis.id %}" class="btn btn-primary">Transform Facture</a>
-
+          {% endif %}
+          <a href="{% url 'generate_pdf' devis.id %}" class="btn btn-primary my-5">Transform PDF</a>
         {% endif %}
     </div>
     

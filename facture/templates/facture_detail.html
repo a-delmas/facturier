@@ -14,12 +14,12 @@
     </div>
     <div class="col-12 text-right ">
         <ul class="list-unstyled">
-            <li class="font-weight-bold"><span class="text-uppercase">{{ facture.devis.client_devis.first_name }}</span> {{ facture.devis.client_devis.last_name }}</li>
-            <li>{{ facture.devis.client_devis.raison_sociale }}</li>
-            <li>{{ facture.address_choice.num }} {{ facture.address_choice.address }}</li>
-            <li>{{ facture.address_choice.complement }}</li>
-            <li>{{ facture.address_choice.zipcode }}</li>
-            <li>Tel: {{ facture.devis.client_devis.tel }}</li>
+            <li class="font-weight-bold"><span class="text-uppercase">{{ facture.client.first_name }}</span> {{ facture.client.last_name }}</li>
+            <li>{{ facture.client.raison_sociale }}</li>
+            <li>{{ facture.client.consult_facture.num }} {{ facture.address_choice.address }}</li>
+            <li>{{ facture.client.address_choice.complement }}</li>
+            <li>{{ facture.client.address.zipcode }}</li>
+            <li>Tel: {{ facture.client.tel }}</li>
         </ul>
     </div>
     <div class="col-12 mb-5">
@@ -59,10 +59,10 @@
         <h4>TVA (20%) : {{facture.total_tva}} €</h4>
         <h3>Total TTC : {{facture.total_ttc}} €</h3>
         
-        {% comment %}
         {% if not pdf %}
-          <a href="{% url 'generate_pdf' devis.id %}" class="btn btn-primary my-5">Transform PDF</a>
+        <a href="{% url 'generate_pdf_facture' facture.id %}" class="btn btn-primary my-5">Transform PDF</a>
         {% endif %}
+        {% comment %}
         {% endcomment %}
     </div>
     
