@@ -29,7 +29,7 @@
                     <th scope="col">Nom Client</th>
                     <th scope="col">Raison Sociale</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Voir</th>
+                    <!-- <th scope="col">Voir</th> -->
                     <!-- <th scope="col">Del</th> -->
                 </tr>
             </thead>
@@ -62,7 +62,7 @@
                     <th scope="col">Nom Client</th>
                     <th scope="col">Raison Sociale</th>
                     <th scope="col">Date</th>
-                    <!-- <th scope="col">Voir</th>-->
+                    <th scope="col">Voir</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,9 +72,9 @@
                     <td>{{ facture.client.last_name }}</td>
                     <td>{{ facture.client.raison_sociale }}</td>
                     <td>{{ facture.date }}</td>
+                    <td><a href="{% url 'detail-facture' facture.id %}" class="text-dark">Consulter</a></td>
                     
                     {% comment %}
-                    <td><a href="{% url 'detail-facture' facture.id %}" class="text-dark">Consulter</a></td>
                     {% endcomment %}
                 </tr>
                 {% endfor %}

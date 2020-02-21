@@ -40,7 +40,7 @@
     <div class="container-fluid p-0"><!-- Début container-->
 
         <header>
-            <nav class="navbar bg-dark">
+            <nav class="navbar">
                 <a class="navbar-brand logoHeader" href="{% url 'home' %}">Home</a>
                 
                 {% if user.is_authenticated %}
@@ -55,11 +55,11 @@
         <main>
           <!-- <div class="container p-0"> -->
             {% block content %}
-            
             {% endblock %}
-          <!-- </div> -->
-        </main>
-        <footer class="bg-dark text-center text-white">
+            <!-- </div> -->
+          </main>
+
+        <footer class="text-center">
             <p>copyright by JB and Aurore</p>
         </footer>
 
