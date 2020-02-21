@@ -1,0 +1,17 @@
+main{
+    height: 78vh;
+    background-image: url('téléchargement.jpeg');
+    .navMain {
+        background-color: white;
+        // width: 80%;
+        // margin: auto;
+    }
+    a {
+        text-decoration: none;
+        color: black;
+        &:hover {
+            color: rgb(110, 35, 35);
+            text-decoration: none;
+        }
+    }
+}

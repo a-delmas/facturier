@@ -1,11 +1,12 @@
 nav {
-    height: 12vh;
     background-color: #564841;
+    height: 13vh;
     a {
         text-decoration: none;
         color: black;
         &:hover {
             color: white;
+            text-decoration: none;
         }
     }
 }

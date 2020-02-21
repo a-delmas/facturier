@@ -61,13 +61,13 @@
         {% if not pdf %}
         {% if perms.devis.change_devis %}
           <a href="{% url 'update-devis' devis.id %}" class="btn btn-success my-5">Update</a>
-          {% endif %}
-          {% if perms.devis.delete_devis %}
+        {% endif %}
+        {% if perms.devis.delete_devis %}
           <button data-toggle="modal" data-target="#supDevis"  class="btn btn-danger"><a href="#" class="text-white">Delete</a></button>
-          {% endif %}
-          {% if perms.devis.add_facture %}
+        {% endif %}
+        {% if perms.devis.add_facture %}
           <a href="{% url 'facture' devis.id %}" class="btn btn-primary">Transform Facture</a>
-          {% endif %}
+        {% endif %}
           <a href="{% url 'generate_pdf' devis.id %}" class="btn btn-primary my-5">Transform PDF</a>
         {% endif %}
     </div>
